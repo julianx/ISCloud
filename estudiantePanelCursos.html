@@ -1,0 +1,378 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>ISCloud</title> 
+
+		<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+		<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js"></script>
+		
+		
+		
+		<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
+				
+		<style type="text/css">
+			body {
+				padding-top: 60px; padding-bottom: 40px;
+			}
+			.sidebar-nav {
+				padding: 9px 0;
+			} 
+			@media (max-width: 980px) {
+				/* Enable use of floated navbar text */
+				.navbar-text.pull-right {
+					float: none; padding-left: 5px; padding-right: 5px;
+				}
+			}
+		</style>
+    </head> 
+	<body>
+	    <div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+					</button> <a class="brand" href="#">ISCloud Estudiante</a>
+					<div class="nav-collapse collapse">
+						<p class="navbar-text pull-right">
+							Autenticado en el sistema como <b> <a href="#" class="navbar-link">mb.juan10</a> </b>
+						</p>
+						<ul class="nav">
+							<li class="active">
+								<a href="#">Cursos</a>
+							</li>
+							<li>
+								<a href="#about">Proyectos</a>
+							</li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div>
+			</div>
+	    </div>
+	    <div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span3">
+					<div class="well sidebar-nav">
+						<ul class="nav nav-list">
+							<li class="nav-header">
+								MISIS
+							</li> 
+							<li class="active">
+								<a href="#">ISIS 3510-2 Construcción aplicaciones móviles </a>
+							</li>
+							<li>
+								<a href="#">ISIS 3502-1 Sistemas Manejadores de Bases de Datos</a>
+							</li>
+						</ul>
+					</div><!--/.well -->
+				</div><!--/span--> 
+				<div class="span9">
+					<div id="main" class="container">
+						<table class="table table-striped">
+							<tr>
+								<th style="width: 1px;"></th> 
+								<th><b>Laboratorios virtuales</b></th>
+								<th><b>Operaciones</b></th>
+								<th><b>Guardar estado</b></th>
+								<th><b>Estados anteriores</b></th>
+							</tr> 
+							<!-- ko foreach: tasks -->
+								<tr>
+									<td>
+										<span data-bind="visible: activo()" class="label label-success">Activo</span>
+										<span data-bind="visible: !activo()" class="label label-important">Inactivo</span>
+										<span data-bind="visible: pausado();" class="label">Pausado</span>
+										<span class="label label-warning">Plazo: <span data-bind="text: plazo">	</span> días</span>
+									</td>
+									<td>
+										<p>
+											<b data-bind="text: titulo"></b>
+											<br /><b data-bind="text: descripcion"></b>
+										</p>
+										<b>Usuario: </b><b data-bind="text: usuario"></b>
+										<br />
+										<b>Password: </b><b data-bind="text: password"></b>
+										<br />
+										<a href=""><span data-bind="text: accesoDirecto">Descargar acceso directo</span></a>
+									</td>
+									<td>
+										<span data-bind="visible: inactivo() || pausado();">
+											<button data-bind="click: $parent.marcarActivo" class="btn">
+												<i class="icon-play"></i> Iniciar
+											</button> 
+										</span>
+										<span data-bind="visible: activo()">
+											<button data-bind="click: $parent.marcarPausado" class="btn">
+												<i class="icon-pause"></i> Pausar
+											</button> 
+										</span>
+										<span data-bind="visible: activo() || pausado();">
+											<button data-bind="click: $parent.marcarInactivo" class="btn">
+												<i class="icon-stop"></i> Terminar
+											</button> 
+										</span>
+										<br /> 
+										<button data-bind="click: $parent.reportarProblema" class="btn btn-danger" style="margin-top:10px;">
+											<i class="icon-envelope"></i> Reportar problema
+										</button>
+									</td>
+									<td> <button data-bind="click: $parent.guardarEstado" class="btn">
+										<i class="icon-camera"></i> Guardar estado</button>
+										<br />
+									</td>
+									<td> 
+										<select name="comboBoxRestaurarEstado" style="width: 250px;">
+											<optgroup label="Viernes 15/11/2013">
+												<option value="345">19:42:01 - Proyecto funcionando</option>
+												<option value="456">16:00:30 - Antes de la prueba 2</option>
+											</optgroup> 
+											<optgroup label="Jueves 14/11/2013">
+												<option value="234">11:50:10 - Antes de prueba 1</option>
+												<option value="123">10:30:54 - Apenas inicié el laboratorio</option>
+											</optgroup>
+										</select>
+										<br />
+										<button data-bind="click: $parent.restaurarEstado" class="btn">
+											<i class="icon-fast-backward"></i> Restaurar estado
+										</button>
+									</td>
+								</tr> 
+							<!-- /ko -->
+						</table>
+					</div>
+
+					<div id="add" class="modal hide fade" tabindex="=1" role="dialog" aria-labelledby="addDialogLabel" aria-hidden="true">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h3 id="addDialogLabel">Add Task</h3>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal">
+
+									<div class="control-group">
+										<label class="control-label" for="inputPlazo">Plazo</label>
+										<div class="controls">
+											<input data-bind="value: plazo" type="text" id="inputPlazo" placeholder="Plazo" style="width: 150px;">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label" for="inputTitulo">Titulo</label>
+										<div class="controls">
+											<input data-bind="value: titulo" type="text" id="inputTitulo" placeholder="Titulo" style="width: 300px;">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label" for="inputDescripcion">Descripcion</label>
+										<div class="controls">
+											<input data-bind="value: descripcion" type="text" id="inputDescripcion" placeholder="Descripcion" style="width: 300px;">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label" for="inputUsuario">Usuario</label>
+										<div class="controls">
+											<input data-bind="value: usuario" type="text" id="inputUsuario" placeholder="Usuario" style="width: 300px;">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label" for="inputPassword">Password</label>
+										<div class="controls">
+											<input data-bind="value: password" type="text" id="inputPassword" placeholder="Password" style="width: 300px;">
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label" for="inputAccesoDirecto">AccesoDirecto</label>
+										<div class="controls">
+											<input data-bind="value: accesoDirecto" type="text" id="inputAccesoDirecto" placeholder="AccesoDirecto" style="width: 300px;">
+										</div>
+									</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button data-bind="click: addTask" class="btn btn-primary">Add Task</button>
+							<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+						</div>
+					</div>
+
+				</div><!--/span-->
+			</div><!--/row-->
+	    </div>
+
+	    <footer>
+			<p>
+				&copy; <a href="">Departamento de Ingeniería de Sistemas y Computación</a> - <a href="">Universidad de Los Andes</a>
+			</p>
+	    </footer>
+
+	    <script type="text/javascript">
+		
+			function TasksViewModel()
+			{
+				var self = this; 
+				self.tasks = ko.observableArray();
+				
+				self.tasksURI = 'http://localhost:5000/todo/api/v1.0/tasks';
+				self.username = "miguel";
+				self.password = "python";
+	
+				self.ajax = function(uri, method, data) 
+				{
+					var request = {
+						url: uri,
+						type: method,
+						contentType: "application/json",
+						accepts: "application/json",
+						cache: false,
+						dataType: 'json',
+						data: JSON.stringify(data),
+						beforeSend: function (xhr) {
+							xhr.setRequestHeader("Authorization", "Basic " + btoa(self.username + ":" + self.password));
+						},
+						error: function(jqXHR) {
+							console.log("ajax error " + jqXHR.status);
+						}
+					};
+					return $.ajax(request);
+				}
+
+				self.tasks([
+				{
+					plazo			: ko.observable('plazo #1'),
+					titulo			: ko.observable('titulo #1'),
+					descripcion		: ko.observable('descripcion #1'), 
+					usuario			: ko.observable('usuario #1'), 
+					password		: ko.observable('password #1'), 
+					accesoDirecto	: ko.observable('accesoDirecto #1'),
+					activo			: ko.observable(true), 
+					inactivo		: ko.observable(false), 
+					pausado			: ko.observable(false)
+				}, 
+				{
+					plazo			: ko.observable('plazo #2'),
+					titulo			: ko.observable('titulo #2'),
+					descripcion		: ko.observable('descripcion #2'), 
+					usuario			: ko.observable('usuario #2'), 
+					password		: ko.observable('password #2'), 
+					accesoDirecto	: ko.observable('accesoDirecto #2'),
+					activo			: ko.observable(false), 
+					inactivo		: ko.observable(true), 
+					pausado			: ko.observable(false)
+				}, 
+				{
+					plazo : ko.observable('plazo #3'),
+					titulo : ko.observable('titulo #3'),
+					descripcion : ko.observable('descripcion #3'), 
+					usuario : ko.observable('usuario #3'), 
+					password : ko.observable('password #3'), 
+					accesoDirecto : ko.observable('accesoDirecto #3'),
+					activo : ko.observable(false), 
+					inactivo : ko.observable(false), 
+					pausado : ko.observable(true)
+				}]);
+
+				self.marcarActivo = function(task){
+					task.activo(true);
+					task.pausado(false);
+					task.inactivo(false);
+				} 
+				self.marcarPausado = function(task) {
+					task.activo(false);
+					task.pausado(true);
+					task.inactivo(false);
+				} 
+				self.marcarInactivo = function(task) {
+					task.activo(false);
+					task.pausado(false);
+					task.inactivo(true);
+				} 
+				self.reportarProblema = function( ) {
+					alert("Reportando problema");
+				} 
+				self.guardarEstado = function( ) {
+					$('#add').modal('show');
+				}
+
+				self.restaurarEstado = function( ) {
+					alert("Restaurar estado");
+				}
+				
+				self.ajax(self.tasksURI, 'GET').done(function(data) {
+					for (var i = 0; i < data.tasks.length; i++) {
+						self.tasks.push({
+							plazo: ko.observable(data.tasks[i].plazo),
+							titulo: ko.observable(data.tasks[i].titulo),
+							descripcion: ko.observable(data.tasks[i].descripcion),
+							usuario: ko.observable(data.tasks[i].usuario),
+							password: ko.observable(data.tasks[i].password),
+							accesoDirecto: ko.observable(data.tasks[i].accesoDirecto),
+							activo: ko.observable(data.tasks[i].activo),
+							inactivo: ko.observable(data.tasks[i].inactivo),
+							pausado: ko.observable(data.tasks[i].pausado)
+						});
+					}
+				});
+
+				self.add = function(task)
+				{
+					self.ajax(self.tasksURI, 'POST', task).done(function(data) {
+						self.tasks.push({
+							plazo: ko.observable(data.task.plazo),
+							titulo: ko.observable(data.task.titulo),
+							descripcion: ko.observable(data.task.descripcion),
+							usuario: ko.observable(data.task.usuario),
+							password: ko.observable(data.task.password),
+							accesoDirecto: ko.observable(data.task.accesoDirecto),
+							activo: ko.observable(data.task.activo),
+							inactivo: ko.observable(data.task.inactivo),
+							pausado: ko.observable(data.task.pausado)
+						});
+					});
+				}
+			}
+			
+			function AddTaskViewModel() 
+			{
+				
+				var self = this;
+				self.plazo = ko.observable();
+				self.titulo = ko.observable();
+				self.descripcion = ko.observable();
+				self.usuario = ko.observable();
+				self.password = ko.observable();
+				self.accesoDirecto = ko.observable();
+				self.addTask = function() {
+					$('#add').modal('hide');
+					tasksViewModel.add({
+						titulo: self.titulo(),
+						descripcion: self.descripcion(),
+						usuario: self.usuario(),
+						password: self.password(),
+						accesoDirecto: self.accesoDirecto()
+					});
+
+					self.plazo("");
+					self.titulo("");
+					self.descripcion("");
+					self.usuario("");
+					self.password("");
+					self.accesoDirecto("");
+				}
+			}
+
+		var tasksViewModel = new TasksViewModel();
+		var addTaskViewModel = new AddTaskViewModel();
+		ko.applyBindings(tasksViewModel, $('#main')[0]);
+		ko.applyBindings(addTaskViewModel, $('#add')[0]);
+
+	    </script>
+    </body>
+</html>

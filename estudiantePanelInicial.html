@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ISCloud</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+
+    <style type="text/css">
+	  body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+	  
+    </style>
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">ISCloud Estudiante</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+				Autenticado en el sistema como 
+				<b>
+					<a href="#" class="navbar-link">mb.juan10</a>
+				</b>
+            </p>
+            <ul class="nav">
+              <li class="active"><a href="#">Cursos</a></li>
+              <li><a href="#about">Proyectos</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+	
+	<div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">MISIS</li>
+              <li class="active"><a href="#">ISIS 3510-2 Construcción aplicaciones móviles  </a></li>
+              <li><a href="#">ISIS 3502-1 Sistemas Manejadores de Bases de Datos</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+			<div id="main" class="container">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<td style="width:5%;">
+							</td>
+							<th style="width:20%;">
+								<b>Laboratorios virtuales</b>
+							</th>
+							<th style="width:25%;">
+								<b>Operaciones</b>
+							</th>
+							<th style="width:15%;">
+								<b>Guardar estado</b>
+							</th>
+							<th style="width:35%;">
+								<b>Estados anteriores</b>
+							</th>
+						</tr>
+					</thead>
+					<tr>
+						<td>
+							<span class="label label-success">Activo</span>
+							<span class="label label-warning">Plazo: 1 día</span>
+						</td>
+						<td>
+							<b>Taller 1 UML</b><br />
+							<b>Usuario:</b> administrador<br />
+							<b>Password:</b> <button class="btn"><i class="icon-eye-open"></i> Mostrar</button>
+							<br /><a href="">Descargar acceso directo</a>
+						</td>
+						<td>
+							<button class="btn" disabled="disabled"><i class="icon-play"></i>Iniciar</button>
+							<button class="btn"><i class="icon-pause"></i>Pausar</button>
+							<button class="btn"><i class="icon-stop"></i>Terminar</button>
+							<button class="btn btn-danger" style="margin-top:10px;"><i class="icon-envelope"></i> Reportar problema</button>
+						</td>
+						<td>
+							<button class="btn"><i class="icon-camera"> </i> Guardar estado</button></br>
+						</td>
+						<td>
+							<select name="comboBoxRestaurarEstado">
+							  <optgroup label="Viernes 15/11/2013">
+								<option value="345">19:42:01 - Proyecto funcionando</option>
+								<option value="456">16:00:30 - Antes de la prueba 2</option>
+							  </optgroup>
+							  <optgroup label="Jueves 14/11/2013">
+								<option value="234">11:50:10 - Antes de prueba 1</option>
+								<option value="123">10:30:54 - Apenas inicié el laboratorio</option>
+							  </optgroup>
+							</select>
+								<br /><button class="btn"><i class="icon-fast-backward"></i> Restaurar estado</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="label label-important">Inactivo</span>
+						</td>
+						<td>
+							<b>Entorno de desarrollo LAMP</b><br />
+							<b>Usuario:</b> administrador<br />
+							<b>Password:</b> <button class="btn"><i class="icon-eye-open"></i> Mostrar</button>
+							<br /><a href="">Descargar acceso directo</a>
+						</td>
+						
+						<td>
+							<button class="btn"><i class="icon-play"></i>Iniciar</button>
+							<button class="btn" disabled="disabled"><i class="icon-pause"></i>Pausar</button>
+							<button class="btn" disabled="disabled"><i class="icon-stop"></i>Terminar</button><br />
+							<button class="btn btn-danger" style="margin-top:10px;"><i class="icon-envelope"></i> Reportar problema</button>
+						</td>
+						
+						<td>
+							<button class="btn" disabled="disabled"><i class="icon-camera"> </i> Guardar estado</button></br>
+						</td>
+						<td>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			
+			
+			
+			
+        </div><!--/span-->
+      </div><!--/row-->
+	
+	
+	<footer>
+		<p>&copy; <a href="">Departamento de Ingeniería de Sistemas y Computación</a> - <a href="">Universidad de Los Andes</a></p>
+	</footer>
+	
+    <script type="text/javascript">
+	
+	
+		$(function() {
+		$( "#accordion" ).accordion();
+		});
+	
+    </script>
+</body>
+</html>
+

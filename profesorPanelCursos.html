@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ISCloud</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+
+    <style type="text/css">
+	  body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+	  
+    </style>
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">ISCloud Profesor</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+				Autenticado en el sistema como 
+				<b>
+					<a href="#" class="navbar-link">cjimenez</a>
+				</b>
+            </p>
+            <ul class="nav">
+              <li class="active"><a href="#">Cursos</a></li>
+              <li><a href="#about">Proyectos</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+	
+	<div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">MISIS</li>
+              <li class="active"><a href="#">ISIS 3510-2 Construcción aplicaciones móviles  </a></li>
+              <li><a href="#">ISIS 3502-1 Sistemas Manejadores de Bases de Datos</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+			<div id="main" class="container">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<td style="width:1px;">
+							</td>
+							<th>
+								<b>Laboratorio virtual</b>
+							</th>
+						</tr>
+					</thead>
+					<tr>
+						<td>
+							<span class="label label-success">Habilitado</span>
+							<br />
+							<span class="label label-warning">Termina en: 7 días</span>
+						</td>
+						<td>
+							<p>
+								<b>Práctica Windows Phone</b>
+								<br />Activo para <a href="">todos los alumnos</a>
+								<br /><b>Fecha de terminación: </b>Martes 19 de noviembre 2013 23:59:59
+								<br /><b>Monitor: </b><a href="email:David">David Derby</a>
+							</p>
+							<button class="btn"><i class="icon-calendar"></i> Extender tiempo de vida</button>
+							<button class="btn"><i class="icon-off"></i> Terminar laboratorio</button>
+						</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="label label-important">Terminado</span>
+						</td>
+						<td>
+							<p>
+								<b>Práctica Android</b>
+								<br />Activo para <a href="">Grupo1, Grupo6</a>
+								<br /><b>Fecha de terminación: </b>Jueves 14 de noviembre 2013 23:59:59
+								<br /><b>Monitor: </b><a href="email:David">David Derby</a>
+							</p>
+							<button class="btn"><i class="icon-calendar"></i> Extender tiempo de vida</button>
+							<button class="btn" disabled="disabled"><i class="icon-off"></i> Terminar laboratorio</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="label label-important"></span>
+						</td>
+						<td>
+							<button class="btn btn-primary"><i class="icon-plus-sign"></i> Habilitar nuevo laboratorio</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+        </div><!--/span-->
+      </div><!--/row-->
+	</div>
+	
+	<footer>
+		<p>&copy; <a href="">Departamento de Ingeniería de Sistemas y Computación</a> - <a href="">Universidad de Los Andes</a></p>
+	</footer>
+	
+    <script type="text/javascript">
+	
+	
+		$(function() {
+		$( "#accordion" ).accordion();
+		});
+	
+    </script>
+</body>
+</html>
