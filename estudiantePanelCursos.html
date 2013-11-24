@@ -89,7 +89,7 @@
 								<tr>
 									<td>
 										<span data-bind="visible: activo()" class="label label-success">Activo</span>
-										<span data-bind="visible: !activo()" class="label label-important">Inactivo</span>
+										<span data-bind="visible: inactivo()" class="label label-important">Inactivo</span>
 										<span data-bind="visible: pausado();" class="label">Pausado</span>
 										<span class="label label-warning">Plazo: <span data-bind="text: plazo">	</span> días</span>
 									</td>
@@ -105,17 +105,17 @@
 										<a href=""><span data-bind="text: accesoDirecto">Descargar acceso directo</span></a>
 									</td>
 									<td>
-										<span data-bind="visible: inactivo() || pausado();">
+										<span data-bind="visible: !activo()">
 											<button data-bind="click: $parent.marcarActivo" class="btn">
 												<i class="icon-play"></i> Iniciar
 											</button> 
 										</span>
-										<span data-bind="visible: activo()">
+										<span data-bind="visible: !pausado() && activo()">
 											<button data-bind="click: $parent.marcarPausado" class="btn">
 												<i class="icon-pause"></i> Pausar
 											</button> 
 										</span>
-										<span data-bind="visible: activo() || pausado();">
+										<span data-bind="visible: !inactivo()">
 											<button data-bind="click: $parent.marcarInactivo" class="btn">
 												<i class="icon-stop"></i> Terminar
 											</button> 
@@ -243,7 +243,7 @@
 					};
 					return $.ajax(request);
 				}
-
+/*
 				self.tasks([
 				{
 					plazo			: ko.observable('plazo #1'),
@@ -266,33 +266,46 @@
 					activo			: ko.observable(false), 
 					inactivo		: ko.observable(true), 
 					pausado			: ko.observable(false)
-				}, 
-				{
-					plazo : ko.observable('plazo #3'),
-					titulo : ko.observable('titulo #3'),
-					descripcion : ko.observable('descripcion #3'), 
-					usuario : ko.observable('usuario #3'), 
-					password : ko.observable('password #3'), 
-					accesoDirecto : ko.observable('accesoDirecto #3'),
-					activo : ko.observable(false), 
-					inactivo : ko.observable(false), 
-					pausado : ko.observable(true)
 				}]);
+*/
+		self.markInProgress = function(task) {
+			self.ajax(task.uri(), 'PUT', { done: false }).done(function(res) {
+				self.updateTask(task, res.task);
+			});
+        }
+        self.markDone = function(task) {
+            self.ajax(task.uri(), 'PUT', { done: true }).done(function(res) {
+                self.updateTask(task, res.task);
+            });
+        }
 
-				self.marcarActivo = function(task){
+				self.marcarActivo = function(task)
+				{
 					task.activo(true);
 					task.pausado(false);
 					task.inactivo(false);
+
+					self.ajax(task.uri(), 'PUT', { activo: true, pausado: false, inactivo: false }).done(function(res) {
+						self.updateTask(task, res.task);
+					});
 				} 
 				self.marcarPausado = function(task) {
 					task.activo(false);
 					task.pausado(true);
 					task.inactivo(false);
+
+					self.ajax(task.uri(), 'PUT', { activo: false, pausado: true, inactivo: false }).done(function(res) {
+						self.updateTask(task, res.task);
+					});
 				} 
 				self.marcarInactivo = function(task) {
 					task.activo(false);
 					task.pausado(false);
 					task.inactivo(true);
+
+					self.ajax(task.uri(), 'PUT', { activo: false, pausado: false, inactivo: true }).done(function(res) {
+						self.updateTask(task, res.task);
+					});
 				} 
 				self.reportarProblema = function( ) {
 					alert("Reportando problema");
@@ -308,6 +321,7 @@
 				self.ajax(self.tasksURI, 'GET').done(function(data) {
 					for (var i = 0; i < data.tasks.length; i++) {
 						self.tasks.push({
+							uri: ko.observable(data.tasks[i].uri),
 							plazo: ko.observable(data.tasks[i].plazo),
 							titulo: ko.observable(data.tasks[i].titulo),
 							descripcion: ko.observable(data.tasks[i].descripcion),
@@ -325,6 +339,7 @@
 				{
 					self.ajax(self.tasksURI, 'POST', task).done(function(data) {
 						self.tasks.push({
+							uri: ko.observable(data.task.uri),
 							plazo: ko.observable(data.task.plazo),
 							titulo: ko.observable(data.task.titulo),
 							descripcion: ko.observable(data.task.descripcion),
@@ -336,6 +351,21 @@
 							pausado: ko.observable(data.task.pausado)
 						});
 					});
+				}
+
+				self.updateTask = function(task, newTask) 
+				{
+					var i = self.tasks.indexOf(task);
+					self.tasks()[i].uri(newTask.uri);
+					self.tasks()[i].plazo(newTask.plazo);
+					self.tasks()[i].titulo(newTask.titulo);
+					self.tasks()[i].descripcion(newTask.descripcion);
+					self.tasks()[i].usuario(newTask.usuario);
+					self.tasks()[i].password(newTask.password);
+					self.tasks()[i].accesoDirecto(newTask.accesoDirecto);
+					self.tasks()[i].activo(newTask.activo);
+					self.tasks()[i].inactivo(newTask.inactivo);
+					self.tasks()[i].pausado(newTask.pausado);
 				}
 			}
 			
