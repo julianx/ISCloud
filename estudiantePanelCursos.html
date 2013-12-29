@@ -9,16 +9,6 @@
 
 		<title>ISCloud</title> 
 
-		<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-		<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js"></script>
-		
-		
-		
-		<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
 				
 		<style type="text/css">
 			body {
@@ -34,9 +24,9 @@
 				}
 			}
 		</style>
-    </head> 
+	</head> 
 	<body>
-	    <div class="navbar navbar-fixed-top">
+		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container-fluid">
 					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -57,8 +47,8 @@
 					</div><!--/.nav-collapse -->
 				</div>
 			</div>
-	    </div>
-	    <div class="container-fluid">
+		</div>
+		<div class="container-fluid">
 			<div class="row-fluid">
 				<div class="span3">
 					<div class="well sidebar-nav">
@@ -122,7 +112,7 @@
 										</span>
 										<br /> 
 										<button data-bind="click: $parent.reportarProblema" class="btn btn-danger" style="margin-top:10px;">
-											<i class="icon-envelope"></i> Reportar problema
+											<i class="icon-envelope icon-white"></i> Reportar problema
 										</button>
 									</td>
 									<td> <button data-bind="click: $parent.guardarEstado" class="btn">
@@ -150,79 +140,113 @@
 						</table>
 					</div>
 
-					<div id="add" class="modal hide fade" tabindex="=1" role="dialog" aria-labelledby="addDialogLabel" aria-hidden="true">
+					<div id="login" class="modal hide fade" tabindex="=1" role="dialog" aria-labelledby="loginLabel" aria-hidden="true">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h3 id="addDialogLabel">Add Task</h3>
+							<h3 id="loginLabel">Sign In</h3>
 						</div>
 						<div class="modal-body">
 							<form class="form-horizontal">
-
-									<div class="control-group">
-										<label class="control-label" for="inputPlazo">Plazo</label>
-										<div class="controls">
-											<input data-bind="value: plazo" type="text" id="inputPlazo" placeholder="Plazo" style="width: 150px;">
-										</div>
+								<div class="control-group">
+									<label class="control-label" for="inputUsername">Username</label>
+									<div class="controls">
+										<input data-bind="value: username" type="text" id="inputUsername" placeholder="Username">
 									</div>
-									<div class="control-group">
-										<label class="control-label" for="inputTitulo">Titulo</label>
-										<div class="controls">
-											<input data-bind="value: titulo" type="text" id="inputTitulo" placeholder="Titulo" style="width: 300px;">
-										</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="inputPassword">Password</label>
+									<div class="controls">
+										<input data-bind="value: password" type="password" id="inputPassword" placeholder="Password">
 									</div>
-									<div class="control-group">
-										<label class="control-label" for="inputDescripcion">Descripcion</label>
-										<div class="controls">
-											<input data-bind="value: descripcion" type="text" id="inputDescripcion" placeholder="Descripcion" style="width: 300px;">
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label" for="inputUsuario">Usuario</label>
-										<div class="controls">
-											<input data-bind="value: usuario" type="text" id="inputUsuario" placeholder="Usuario" style="width: 300px;">
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label" for="inputPassword">Password</label>
-										<div class="controls">
-											<input data-bind="value: password" type="text" id="inputPassword" placeholder="Password" style="width: 300px;">
-										</div>
-									</div>
-
-									<div class="control-group">
-										<label class="control-label" for="inputAccesoDirecto">AccesoDirecto</label>
-										<div class="controls">
-											<input data-bind="value: accesoDirecto" type="text" id="inputAccesoDirecto" placeholder="AccesoDirecto" style="width: 300px;">
-										</div>
-									</div>
+								</div>
 							</form>
 						</div>
 						<div class="modal-footer">
-							<button data-bind="click: addTask" class="btn btn-primary">Add Task</button>
-							<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+							<button data-bind="click: login" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Sign In</button>
 						</div>
 					</div>
 
 				</div><!--/span-->
 			</div><!--/row-->
-	    </div>
+		</div>
 
-	    <footer>
+		<div id="reportarFuncionamientoIncorrecto" class="modal hide fade" tabindex="=1" role="dialog" aria-labelledby="reportarFuncionamientoIncorrectoDialogLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3>Reportar problema</h3>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal">
+					<div class="control-group">
+						<label class="control-label" for="selectTipoDeProblema">Tipo de problema</label>
+						<div class="controls">
+							<select class="span3" id="selectTipoDeProblema">
+								<option>Recursos computacionales asignados erróneos</option>
+								<option>Programa no funcionando</option>
+								<option>Máquina lenta</option>
+								<option>Error de sistema operativo</option>
+								<option>Error de credenciales</option>
+								<option>Error de conexión</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label" for="textareaDescripcion">Descripcion</label>
+						<div class="controls">
+							<textarea rows="3" data-bind="value: descripcion" type="text" id="textareaDescripcion" placeholder="Descripcion" style="width: 250px;">
+							</textarea>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button data-bind="click: reportarFuncionamientoIncorrecto" class="btn btn-primary" type="button"><i class="icon-envelope icon-white"></i> Enviar</button>
+
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+			</div>
+		</div>
+
+
+		<div id="guardarEstado" class="modal hide fade" tabindex="=1" role="dialog" aria-labelledby="guardarEstadoDialogLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3>Guardar estado de ejecución</h3>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal">
+					<div class="control-group">
+						<label class="control-label" for="textareaDescripcion">Descripción</label>
+						<div class="controls">
+							<textarea rows="3" data-bind="value: descripcion" type="text" id="textareaDescripcion" placeholder="Descripción opcional" style="width: 250px;">
+							</textarea>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button data-bind="click: guardarEstado" class="btn btn-primary" type="button"><i class="icon-camera icon-white"></i> Guardar estado</button>
+
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+			</div>
+		</div>
+
+		<footer>
 			<p>
 				&copy; <a href="">Departamento de Ingeniería de Sistemas y Computación</a> - <a href="">Universidad de Los Andes</a>
 			</p>
-	    </footer>
+		</footer>
 
-	    <script type="text/javascript">
+		<script type="text/javascript">
 		
 			function TasksViewModel()
 			{
 				var self = this; 
 				self.tasks = ko.observableArray();
-				
-				self.tasksURI = 'http://localhost:5000/todo/api/v1.0/tasks';
+
 				self.username = "miguel";
 				self.password = "python";
+				
+				self.tasksURI = 'http://localhost:5000/todo/api/v1.0/tasks';
 	
 				self.ajax = function(uri, method, data) 
 				{
@@ -243,41 +267,6 @@
 					};
 					return $.ajax(request);
 				}
-/*
-				self.tasks([
-				{
-					plazo			: ko.observable('plazo #1'),
-					titulo			: ko.observable('titulo #1'),
-					descripcion		: ko.observable('descripcion #1'), 
-					usuario			: ko.observable('usuario #1'), 
-					password		: ko.observable('password #1'), 
-					accesoDirecto	: ko.observable('accesoDirecto #1'),
-					activo			: ko.observable(true), 
-					inactivo		: ko.observable(false), 
-					pausado			: ko.observable(false)
-				}, 
-				{
-					plazo			: ko.observable('plazo #2'),
-					titulo			: ko.observable('titulo #2'),
-					descripcion		: ko.observable('descripcion #2'), 
-					usuario			: ko.observable('usuario #2'), 
-					password		: ko.observable('password #2'), 
-					accesoDirecto	: ko.observable('accesoDirecto #2'),
-					activo			: ko.observable(false), 
-					inactivo		: ko.observable(true), 
-					pausado			: ko.observable(false)
-				}]);
-*/
-		self.markInProgress = function(task) {
-			self.ajax(task.uri(), 'PUT', { done: false }).done(function(res) {
-				self.updateTask(task, res.task);
-			});
-        }
-        self.markDone = function(task) {
-            self.ajax(task.uri(), 'PUT', { done: true }).done(function(res) {
-                self.updateTask(task, res.task);
-            });
-        }
 
 				self.marcarActivo = function(task)
 				{
@@ -308,33 +297,16 @@
 					});
 				} 
 				self.reportarProblema = function( ) {
-					alert("Reportando problema");
+					$('#reportarFuncionamientoIncorrecto').modal('show');
 				} 
 				self.guardarEstado = function( ) {
-					$('#add').modal('show');
+					$('#guardarEstado').modal('show');
 				}
 
 				self.restaurarEstado = function( ) {
 					alert("Restaurar estado");
 				}
 				
-				self.ajax(self.tasksURI, 'GET').done(function(data) {
-					for (var i = 0; i < data.tasks.length; i++) {
-						self.tasks.push({
-							uri: ko.observable(data.tasks[i].uri),
-							plazo: ko.observable(data.tasks[i].plazo),
-							titulo: ko.observable(data.tasks[i].titulo),
-							descripcion: ko.observable(data.tasks[i].descripcion),
-							usuario: ko.observable(data.tasks[i].usuario),
-							password: ko.observable(data.tasks[i].password),
-							accesoDirecto: ko.observable(data.tasks[i].accesoDirecto),
-							activo: ko.observable(data.tasks[i].activo),
-							inactivo: ko.observable(data.tasks[i].inactivo),
-							pausado: ko.observable(data.tasks[i].pausado)
-						});
-					}
-				});
-
 				self.add = function(task)
 				{
 					self.ajax(self.tasksURI, 'POST', task).done(function(data) {
@@ -367,6 +339,62 @@
 					self.tasks()[i].inactivo(newTask.inactivo);
 					self.tasks()[i].pausado(newTask.pausado);
 				}
+
+				self.beginLogin = function() 
+				{
+					$('#login').modal('show');
+				}
+
+
+				self.ajax(self.tasksURI, 'GET').done(function(data) {
+					for (var i = 0; i < data.tasks.length; i++) {
+						self.tasks.push({
+							uri: ko.observable(data.tasks[i].uri),
+							plazo: ko.observable(data.tasks[i].plazo),
+							titulo: ko.observable(data.tasks[i].titulo),
+							descripcion: ko.observable(data.tasks[i].descripcion),
+							usuario: ko.observable(data.tasks[i].usuario),
+							password: ko.observable(data.tasks[i].password),
+							accesoDirecto: ko.observable(data.tasks[i].accesoDirecto),
+							activo: ko.observable(data.tasks[i].activo),
+							inactivo: ko.observable(data.tasks[i].inactivo),
+							pausado: ko.observable(data.tasks[i].pausado)
+						});
+					}
+				}).fail(function(err) {
+						if (jqXHR.status == 403)
+							setTimeout(self.beginLogin, 500);
+				});
+
+
+/*				self.login = function(username, password)
+				{
+					self.username = username;
+					self.password = password;
+
+					self.ajax(self.tasksURI, 'GET').done(function(data) {
+						for (var i = 0; i < data.tasks.length; i++) {
+							self.tasks.push({
+								uri: ko.observable(data.tasks[i].uri),
+								plazo: ko.observable(data.tasks[i].plazo),
+								titulo: ko.observable(data.tasks[i].titulo),
+								descripcion: ko.observable(data.tasks[i].descripcion),
+								usuario: ko.observable(data.tasks[i].usuario),
+								password: ko.observable(data.tasks[i].password),
+								accesoDirecto: ko.observable(data.tasks[i].accesoDirecto),
+								activo: ko.observable(data.tasks[i].activo),
+								inactivo: ko.observable(data.tasks[i].inactivo),
+								pausado: ko.observable(data.tasks[i].pausado)
+							});
+						}
+					}).fail(function(err) {
+						if (jqXHR.status == 403)
+							setTimeout(self.beginLogin, 500);
+					});
+				}
+
+				self.beginLogin();
+*/
 			}
 			
 			function AddTaskViewModel() 
@@ -398,11 +426,49 @@
 				}
 			}
 
-		var tasksViewModel = new TasksViewModel();
-		var addTaskViewModel = new AddTaskViewModel();
-		ko.applyBindings(tasksViewModel, $('#main')[0]);
-		ko.applyBindings(addTaskViewModel, $('#add')[0]);
+			function LoginViewModel()
+			{
+				var self = this;
+				self.username = ko.observable();
+				self.password = ko.observable();
 
-	    </script>
-    </body>
+				self.login = function() {
+					$('#login').modal('hide');
+					tasksViewModel.login(self.username(), self.password());
+				}
+			}
+
+			function ReportarFuncionamientoIncorrectoViewModel()
+			{
+				var self = this;
+				self.descripcion = ko.observable();
+
+				self.reportarFuncionamientoIncorrecto = function(){
+					alert("Reportando");
+				}
+			}
+
+			function GuardarEstadoViewModel()
+			{
+				var self = this;
+				self.descripcion = ko.observable();
+
+				self.guardarEstado = function(){
+					alert("Guardando estado");
+				}
+
+			}
+
+		var tasksViewModel = new TasksViewModel();
+		var reportarFuncionamientoIncorrectoViewModel = new ReportarFuncionamientoIncorrectoViewModel();
+		var guardarEstadoViewModel = new GuardarEstadoViewModel();
+		//var loginViewModel = new LoginViewModel();
+
+		ko.applyBindings(tasksViewModel, $('#main')[0]);
+		//ko.applyBindings(loginViewModel, $('#login')[0]);
+		ko.applyBindings(reportarFuncionamientoIncorrectoViewModel, $('#reportarFuncionamientoIncorrecto')[0]);
+		ko.applyBindings(guardarEstadoViewModel, $('#guardarEstado')[0]);
+
+		</script>
+	</body>
 </html>

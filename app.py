@@ -123,9 +123,15 @@ def update_task(task_id):
         abort(400)
     if 'activo' in request.json and type(request.json['activo']) is not bool:
         abort(400)
+    task[0]['plazo'] = request.json.get('plazo', task[0]['plazo'])
     task[0]['titulo'] = request.json.get('titulo', task[0]['titulo'])
     task[0]['descripcion'] = request.json.get('descripcion', task[0]['descripcion'])
+    task[0]['usuario'] = request.json.get('usuario', task[0]['usuario'])
+    task[0]['password'] = request.json.get('password', task[0]['password'])
+    task[0]['accesoDirecto'] = request.json.get('accesoDirecto', task[0]['accesoDirecto'])
     task[0]['activo'] = request.json.get('activo', task[0]['activo'])
+    task[0]['inactivo'] = request.json.get('inactivo', task[0]['inactivo'])
+    task[0]['pausado'] = request.json.get('pausado', task[0]['pausado'])
     return jsonify( { 'task': make_public_task(task[0]) } )
     
 @app.route('/todo/api/v1.0/tasks/<int:task_id>', methods = ['DELETE'])

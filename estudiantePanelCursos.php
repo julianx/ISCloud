@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html>
 	<head>
-		<meta charset="utf-8">
+		<meta charset="ISO-8859-15">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<meta name="description" content="">
@@ -65,7 +65,7 @@
 								MISIS
 							</li> 
 							<li class="active">
-								<a href="#">ISIS 3510-2 Construcci贸n aplicaciones m贸viles </a>
+								<a href="#">ISIS 3510-2 Construcci髇 aplicaciones m髒iles </a>
 							</li>
 							<li>
 								<a href="#">ISIS 3502-1 Sistemas Manejadores de Bases de Datos</a>
@@ -127,27 +127,29 @@
 										<i class="icon-camera"></i> Guardar estado</button>
 										<br />
 									</td>
-									<td> 
-										<select name="comboBoxRestaurarEstado" style="width: 250px;">
-											<optgroup label="Viernes 15/11/2013">
-												<option value="345">19:42:01 - Proyecto funcionando</option>
-												<option value="456">16:00:30 - Antes de la prueba 2</option>
-											</optgroup> 
-											<optgroup label="Jueves 14/11/2013">
-												<option value="234">11:50:10 - Antes de prueba 1</option>
-												<option value="123">10:30:54 - Apenas inici茅 el laboratorio</option>
-													<?php
-													/*
-														echo "<option>";
-														$texto = "Gaston";
-														$id = 007;
-														echo "<option value=".$texto." id=".$id." > ".$texto."</option>";
-														//" "('l jS \of F Y h:i:s A');
-														echo "</option>";
-													*/
-												  	?>
+									<td>
+										<select name="comboBoxRestaurarEstado">
 
-											</optgroup>
+												<?php
+													require_once __DIR__ . '/php-activerecord/ActiveRecord.php';
+
+													// initialize ActiveRecord
+													// change the connection settings to whatever is appropriate for your mysql server 
+													ActiveRecord\Config::initialize(function($cfg)
+													{
+														$cfg->set_model_directory('models');
+														$cfg->set_connections(array('development' => 'mysql://iscloud1320:HGXi4xBdkA6t75v2IWvz@127.0.0.1/iscloud1320'));
+													});
+
+													$estadoLab = EstadoLaboratorio::first();
+
+													$estadoLab = EstadoLaboratorio::find('all');
+													foreach ($estadoLab as $estado) 
+													{
+														echo '<option value="'.$estado->id.'" >'.$estado->timestamp." ".$estado->descripcion."</option>";
+													}
+												?>
+
 										</select>
 										<br />
 										<button data-bind="click: $parent.restaurarEstado" class="btn">
@@ -190,7 +192,7 @@
 
 		<div id="reportarFuncionamientoIncorrecto" class="modal hide fade" tabindex="=1" role="dialog" aria-labelledby="reportarFuncionamientoIncorrectoDialogLabel" aria-hidden="true">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">脳</button>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 				<h3>Reportar problema</h3>
 			</div>
 			<div class="modal-body">
@@ -199,18 +201,18 @@
 						<label class="control-label" for="selectTipoDeProblema">Tipo de problema</label>
 						<div class="controls">
 							<select class="span3" id="selectTipoDeProblema">
-								<option>Recursos computacionales asignados err贸neos</option>
+								<option>Recursos computacionales asignados err髇eos</option>
 								<option>Programa no funcionando</option>
-								<option>M谩quina lenta</option>
+								<option>M醧uina lenta</option>
 								<option>Error de sistema operativo</option>
 								<option>Error de credenciales</option>
-								<option>Error de conexi贸n</option>
+								<option>Error de conexi髇</option>
 							</select>
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="textareaDescripcion">Descripcion</label>
+						<label class="control-label" for="textareaDescripcion">Descripci髇</label>
 						<div class="controls">
 							<textarea rows="3" data-bind="value: descripcion" type="text" id="textareaDescripcion" placeholder="Descripcion" style="width: 250px;">
 							</textarea>
@@ -228,22 +230,22 @@
 
 		<div id="guardarEstado" class="modal hide fade" tabindex="=1" role="dialog" aria-labelledby="guardarEstadoDialogLabel" aria-hidden="true">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">脳</button>
-				<h3>Guardar estado de ejecuci贸n</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+				<h3>Guardar estado de ejecuci髇</h3>
 			</div>
 			<div class="modal-body">
 				<form class="form-horizontal">
 					<div class="control-group">
-						<label class="control-label" for="textareaDescripcion">Descripci贸n</label>
+						<label class="control-label" for="textareaDescripcion">Descripci髇</label>
 						<div class="controls">
-							<textarea rows="3" data-bind="value: descripcion" type="text" id="textareaDescripcion" placeholder="Descripci贸n opcional" style="width: 250px;">
+							<textarea rows="3" data-bind="value: descripcion" type="text" id="textareaDescripcion" placeholder="Descripci髇 opcional" style="width: 250px;">
 							</textarea>
 						</div>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button data-bind="click: guardarEstado" class="btn btn-primary" type="button"><i class="icon-camera icon-white"></i> Guardar estado</button>
+				<button data-bind="click: guardarEstado( $parent )" class="btn btn-primary" type="button"><i class="icon-camera icon-white"></i> Guardar estado</button>
 
 				<button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
 			</div>
@@ -251,7 +253,7 @@
 
 		<footer>
 			<p>
-				&copy; <a href="">Departamento de Ingenier铆a de Sistemas y Computaci贸n</a> - <a href="">Universidad de Los Andes</a>
+				&copy; <a href="">Departamento de Ingenier韆 de Sistemas y Computaci髇</a> - <a href="">Universidad de Los Andes</a>
 			</p>
 		</footer>
 
@@ -264,7 +266,7 @@
 
 				self.tasks([
 				{
-					plazo : ko.observable('plazo #1'),
+					plazo : ko.observable(1),
 					titulo : ko.observable('titulo #1'),
 					descripcion : ko.observable('descripcion #1'),
 					usuario : ko.observable('usuario #1'),
@@ -273,13 +275,10 @@
 					activo : ko.observable(true), 
 					inactivo : ko.observable(false), 
 					pausado : ko.observable(false),
-					array : [ 'item1'],
-					object : { item2 : 'item2' }
-					//estados : { fecha: "Marzo 14", descripcion: "Sirve"};
-
+					estadosLaboratorio: ko.observable( { id: '2', laboratoriosVirtuales_id : 1, descripcion: 'descripcion', timestamp: 'timestamp' } )
 				}, 
 				{
-					plazo : ko.observable('plazo #2'),
+					plazo : ko.observable(2),
 					titulo : ko.observable('titulo #2'),
 					descripcion : ko.observable('descripcion #2'), 
 					usuario : ko.observable('usuario #2'), 
@@ -287,10 +286,11 @@
 					accesoDirecto : ko.observable('accesoDirecto #2'),
 					activo : ko.observable(false), 
 					inactivo : ko.observable(true), 
-					pausado : ko.observable(false)
+					pausado : ko.observable(false),
+					estadosLaboratorio: ko.observable( { id: '2', laboratoriosVirtuales_id : 1, descripcion: 'descripcion', timestamp: 'timestamp' } )
 				}, 
 				{
-					plazo : ko.observable('plazo #3'),
+					plazo : ko.observable(3),
 					titulo : ko.observable('titulo #3'),
 					descripcion : ko.observable('descripcion #3'), 
 					usuario : ko.observable('usuario #3'), 
@@ -298,192 +298,120 @@
 					accesoDirecto : ko.observable('accesoDirecto #3'),
 					activo : ko.observable(false), 
 					inactivo : ko.observable(false), 
-					pausado : ko.observable(true)
+					pausado : ko.observable(true),
+					estadosLaboratorio: ko.observable({ id: '2', laboratoriosVirtuales_id : 1, descripcion: 'descripcion', timestamp: 'timestamp' } )
 				}]);
+			
+				self.username = "";
+				self.password = "";
 
-				self.username = "miguel";
-				self.password = "python";
+				self.marcarActivo = function( task )
+				{
+					task.activo( true );
+					task.pausado( false );
+					task.inactivo( false );
+
+					self.ajax( task.uri(), 'PUT', { 
+						activo: true, 
+						pausado: false, 
+						inactivo: false 
+					}).done( function( res ) {
+						self.updateTask( task, res.task );
+					});
+				};
 				
-				//self.tasksURI = 'http://localhost:5000/todo/api/v1.0/tasks';
+				self.marcarPausado = function( task ) 
+				{
+					task.activo( false );
+					task.pausado( true );
+					task.inactivo( false );
+
+					self.ajax(task.uri(), 'PUT', { 
+						activo: false, 
+						pausado: true, 
+						inactivo: false 
+					}).done( function( res ) {
+						self.updateTask( task, res.task );
+					});
+				};
 				
-/*				self.ajax = function(uri, method, data) 
+				self.marcarInactivo = function( task ) {
+					task.activo( false );
+					task.pausado( false );
+					task.inactivo( true );
+
+					self.ajax( task.uri(), 'PUT', { 
+						activo: false, 
+						pausado: false, 
+						inactivo: true 
+					}).done( function( res ) {
+						self.updateTask( task, res.task );
+					});
+				};
+				
+				self.reportarProblema = function( ) {
+					$('#reportarFuncionamientoIncorrecto').modal('show');
+				};
+				
+				self.guardarEstado = function() {
+					$('#guardarEstado').modal('show');
+				};
+
+				self.restaurarEstado = function( ) {
+					alert("Restaurar estado");
+				};
+				
+				self.beginLogin = function() 
+				{
+					$('#login').modal('show');
+				};
+				
+				self.crearEstadoLaboratorio = function( estadoLaboratorio ) 
+				{
+					//estadoLaboratorio.laboratoriosVirtuales_id: task.plazo;
+					self.ajax( "/backendUI.php", 'GET', estadoLaboratorio );
+					<?php
+						/*$estadoLab = EstadoLaboratorio::find('all');
+						foreach ($estadoLab as $estado) 
+						{
+							echo "\r\n";
+							//echo ( print_r($estado) );
+							//echo "LabID:".$estado->laboratoriosvirtuales_id;
+							echo "self.estadosLaboratorio.push({id: ".$estado->id.", laboratoriosVirtuales_id: ".$estado->laboratoriosvirtuales_id.', descripcion: "'.$estado->descripcion.'", timestamp: "'.$estado->timestamp.'"});';
+						}*/
+					?>
+						/*self.estadosLaboratorio.push({
+							id: '2', 
+							laboratoriosVirtuales_id : 1,
+							descripcion: 'descripcion', 
+							timestamp: 'timestamp.'
+						});*/
+					
+				};
+				
+				self.ajax = function(uri, method, data) 
 				{
 					var request = {
 						url: uri,
 						type: method,
-						contentType: "application/json",
-						accepts: "application/json",
+						//contentType: "application/json",
+						//accepts: "application/json",
 						cache: false,
-						dataType: 'json',
-						data: JSON.stringify(data),
-						beforeSend: function (xhr) {
+						//dataType: 'json',
+						data: data,
+						//data: JSON.stringify(data),
+						/*beforeSend: function (xhr) {
 							xhr.setRequestHeader("Authorization", "Basic " + btoa(self.username + ":" + self.password));
-						},
+						},*/
 						error: function(jqXHR) {
 							console.log("ajax error " + jqXHR.status);
 						}
 					};
 					return $.ajax(request);
-}*/
-
-				self.marcarActivo = function(task)
-				{
-					task.activo(true);
-					task.pausado(false);
-					task.inactivo(false);
-
-					self.ajax(task.uri(), 'PUT', { activo: true, pausado: false, inactivo: false }).done(function(res) {
-						self.updateTask(task, res.task);
-					});
-				} 
-				self.marcarPausado = function(task) {
-					task.activo(false);
-					task.pausado(true);
-					task.inactivo(false);
-
-					self.ajax(task.uri(), 'PUT', { activo: false, pausado: true, inactivo: false }).done(function(res) {
-						self.updateTask(task, res.task);
-					});
-				} 
-				self.marcarInactivo = function(task) {
-					task.activo(false);
-					task.pausado(false);
-					task.inactivo(true);
-
-					self.ajax(task.uri(), 'PUT', { activo: false, pausado: false, inactivo: true }).done(function(res) {
-						self.updateTask(task, res.task);
-					});
-				} 
-				self.reportarProblema = function( ) {
-					$('#reportarFuncionamientoIncorrecto').modal('show');
-				} 
-				self.guardarEstado = function( ) {
-					$('#guardarEstado').modal('show');
-				}
-
-				self.restaurarEstado = function( ) {
-					alert("Restaurar estado");
-				}
-				
-				self.add = function(task)
-				{
-					//self.ajax(self.tasksURI, 'POST', task).done(function(data) {
-						self.tasks.push({
-							uri: ko.observable(data.task.uri),
-							plazo: ko.observable(data.task.plazo),
-							titulo: ko.observable(data.task.titulo),
-							descripcion: ko.observable(data.task.descripcion),
-							usuario: ko.observable(data.task.usuario),
-							password: ko.observable(data.task.password),
-							accesoDirecto: ko.observable(data.task.accesoDirecto),
-							activo: ko.observable(data.task.activo),
-							inactivo: ko.observable(data.task.inactivo),
-							pausado: ko.observable(data.task.pausado)
-						});
-					//});
-				}
-
-				self.updateTask = function(task, newTask) 
-				{
-					var i = self.tasks.indexOf(task);
-					self.tasks()[i].uri(newTask.uri);
-					self.tasks()[i].plazo(newTask.plazo);
-					self.tasks()[i].titulo(newTask.titulo);
-					self.tasks()[i].descripcion(newTask.descripcion);
-					self.tasks()[i].usuario(newTask.usuario);
-					self.tasks()[i].password(newTask.password);
-					self.tasks()[i].accesoDirecto(newTask.accesoDirecto);
-					self.tasks()[i].activo(newTask.activo);
-					self.tasks()[i].inactivo(newTask.inactivo);
-					self.tasks()[i].pausado(newTask.pausado);
-				}
-
-				self.beginLogin = function() 
-				{
-					$('#login').modal('show');
-				}
-
-/*
-				self.ajax(self.tasksURI, 'GET').done(function(data) {
-					for (var i = 0; i < data.tasks.length; i++) {
-						self.tasks.push({
-							uri: ko.observable(data.tasks[i].uri),
-							plazo: ko.observable(data.tasks[i].plazo),
-							titulo: ko.observable(data.tasks[i].titulo),
-							descripcion: ko.observable(data.tasks[i].descripcion),
-							usuario: ko.observable(data.tasks[i].usuario),
-							password: ko.observable(data.tasks[i].password),
-							accesoDirecto: ko.observable(data.tasks[i].accesoDirecto),
-							activo: ko.observable(data.tasks[i].activo),
-							inactivo: ko.observable(data.tasks[i].inactivo),
-							pausado: ko.observable(data.tasks[i].pausado)
-						});
-					}
-				}).fail(function(err) {
-						if (jqXHR.status == 403)
-							setTimeout(self.beginLogin, 500);
-				});
-*/
-
-/*				self.login = function(username, password)
-				{
-					self.username = username;
-					self.password = password;
-
-					self.ajax(self.tasksURI, 'GET').done(function(data) {
-						for (var i = 0; i < data.tasks.length; i++) {
-							self.tasks.push({
-								uri: ko.observable(data.tasks[i].uri),
-								plazo: ko.observable(data.tasks[i].plazo),
-								titulo: ko.observable(data.tasks[i].titulo),
-								descripcion: ko.observable(data.tasks[i].descripcion),
-								usuario: ko.observable(data.tasks[i].usuario),
-								password: ko.observable(data.tasks[i].password),
-								accesoDirecto: ko.observable(data.tasks[i].accesoDirecto),
-								activo: ko.observable(data.tasks[i].activo),
-								inactivo: ko.observable(data.tasks[i].inactivo),
-								pausado: ko.observable(data.tasks[i].pausado)
-							});
-						}
-					}).fail(function(err) {
-						if (jqXHR.status == 403)
-							setTimeout(self.beginLogin, 500);
-					});
-				}
-
-				self.beginLogin();
-*/
-			}
-			
-			function AddTaskViewModel() 
-			{
-				
-				var self = this;
-				self.plazo = ko.observable();
-				self.titulo = ko.observable();
-				self.descripcion = ko.observable();
-				self.usuario = ko.observable();
-				self.password = ko.observable();
-				self.accesoDirecto = ko.observable();
-				self.addTask = function() {
-					$('#add').modal('hide');
-					tasksViewModel.add({
-						titulo: self.titulo(),
-						descripcion: self.descripcion(),
-						usuario: self.usuario(),
-						password: self.password(),
-						accesoDirecto: self.accesoDirecto()
-					});
-
-					self.plazo("");
-					self.titulo("");
-					self.descripcion("");
-					self.usuario("");
-					self.password("");
-					self.accesoDirecto("");
-				}
+				};
 			}
 
+			//ViewModel for the login dialog
 			function LoginViewModel()
 			{
 				var self = this;
@@ -493,9 +421,12 @@
 				self.login = function() {
 					$('#login').modal('hide');
 					tasksViewModel.login(self.username(), self.password());
-				}
+				};
 			}
 
+			/*
+			 * This function sends a notification to a lab monitor
+			 */
 			function ReportarFuncionamientoIncorrectoViewModel()
 			{
 				var self = this;
@@ -503,29 +434,50 @@
 
 				self.reportarFuncionamientoIncorrecto = function(){
 					alert("Reportando");
-				}
+				};
 			}
-
+				
+			/*
+			* This function pushes an object into the estadosLaboratorio field of a lab
+			 */
 			function GuardarEstadoViewModel()
 			{
+				//Declare vars
 				var self = this;
+				self.id = ko.observable();
+				self.laboratoriosVirtuales_id = ko.observable();
 				self.descripcion = ko.observable();
+				self.timestamp = ko.observable();
 
-				self.guardarEstado = function(){
-					alert("Guardando estado");
-				}
-
+				
+				self.guardarEstado = function( task ) 
+				{
+					//Hide dialog
+					$('#guardarEstado').modal('hide');
+					
+					//Send data
+					tasksViewModel.crearEstadoLaboratorio({
+						id: 'NULL',
+						laboratoriosVirtuales_id: task.plazo ,
+						descripcion: self.descripcion(),
+						timestamp: 'NULL',
+						op: 'crearLaboratorioVirtual'
+					});
+				};
+				
+				//Blank forms
+				self.descripcion("");
 			}
 
-		var tasksViewModel = new tasksViewModel();
-		var reportarFuncionamientoIncorrectoViewModel = new ReportarFuncionamientoIncorrectoViewModel();
-		var guardarEstadoViewModel = new GuardarEstadoViewModel();
-		//var loginViewModel = new LoginViewModel();
+			var tasksViewModel = new tasksViewModel();
+			var reportarFuncionamientoIncorrectoViewModel = new ReportarFuncionamientoIncorrectoViewModel();
+			var guardarEstadoViewModel = new GuardarEstadoViewModel();
+			//var loginViewModel = new LoginViewModel();
 
-		ko.applyBindings(tasksViewModel, $('#main')[0]);
-		//ko.applyBindings(loginViewModel, $('#login')[0]);
-		ko.applyBindings(reportarFuncionamientoIncorrectoViewModel, $('#reportarFuncionamientoIncorrecto')[0]);
-		ko.applyBindings(guardarEstadoViewModel, $('#guardarEstado')[0]);
+			ko.applyBindings(tasksViewModel, $('#main')[0]);
+			//ko.applyBindings(loginViewModel, $('#login')[0]);
+			ko.applyBindings(reportarFuncionamientoIncorrectoViewModel, $('#reportarFuncionamientoIncorrecto')[0]);
+			ko.applyBindings(guardarEstadoViewModel, $('#guardarEstado')[0]);
 
 		</script>
 	</body>
